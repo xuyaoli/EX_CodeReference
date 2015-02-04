@@ -1,4 +1,5 @@
 package CommonUtility;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,21 +24,37 @@ public class FileOp {
 	    return flag;
 	}
 	
-	public static void write2Log(FileWriter logfileWriter, String message) throws IOException{
-		System.out.print(message);
-		logfileWriter.write(message);
-		logfileWriter.flush();
+	public static void write2Log(boolean hasEnter,FileWriter logfileWriter, String message){
+		String message1 = message;
+		if(hasEnter){
+			message1 = message + "\n";
+		}
+		System.out.print(message1);
+		try {
+			logfileWriter.write(message1);
+			logfileWriter.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	// FileWriter logfileWriter= new FileWriter(filePath ,true);//write to debugLog.txt
+	
+	public static void write2Log(FileWriter logfileWriter, String message){
+		write2Log(false,logfileWriter,message);
+	}
+	
+	public static void write2Logln(FileWriter logfileWriter, String message){
+		write2Log(true,logfileWriter,message);
+	}
+	
+	
+	
+	
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	}
-	public static void test(){
-		String logPath = "./Output/log.txt";
-		deleteFile(logPath);
 	}
 }
